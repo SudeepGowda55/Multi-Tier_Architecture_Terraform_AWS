@@ -19,3 +19,14 @@ resource "aws_vpc" "multi-tier_vpc" {
   }
 }
 
+resource "aws_subnet" "three-tier_public_subnet1" {
+  cidr_block = "10.0.0.0/24"
+  vpc_id = aws_vpc.multi-tier_vpc
+  availability_zone = "us-east-1a"
+  tags = {
+    Name = "three-tier_public_subnet1"
+  }
+  depends_on = [
+    aws_vpc.multi-tier_vpc
+  ]
+}

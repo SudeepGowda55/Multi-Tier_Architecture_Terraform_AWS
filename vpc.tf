@@ -11,10 +11,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_vpc" "multitier_vpc" {
+resource "aws_vpc" "multi-tier_vpc" {
   cidr_block = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    Name = "multi-tier VPC"
+    Name = "multi-tier_VPC"
   }
 }
+

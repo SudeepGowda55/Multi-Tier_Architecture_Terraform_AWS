@@ -1,23 +1,13 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "4.36.1"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_subnet" "3tier_public_subnet1" {
+resource "aws_subnet" "three-tier_public_subnet1" {
   cidr_block = "10.0.0.0/24"
-  vpc_id = aws_vpc.multitier_vpc.id
+  vpc_id = aws_vpc.multi-tier_vpc
   availability_zone = "us-east-1a"
   tags = {
-    Name = "3tier_public_subnet1"
+    Name = "three-tier_public_subnet1"
   }
+  depends_on = [
+    aws_vpc.multi-tier_vpc
+  ]
 }
 
 # resource "aws_subnet" "3tier_public_subnet2" {

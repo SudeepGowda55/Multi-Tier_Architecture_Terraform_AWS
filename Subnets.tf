@@ -34,8 +34,12 @@ resource "aws_subnet" "three-tier_private_subnet" {
   ]
 }
 
-# data "aws_subnets" "subnets_id" {
-#   filter {
-    
-#   }
-# }
+data "aws_subnets" "subnets_id" {
+  filter {
+    name = "vpc-id"
+    values = [aws_vpc.multi-tier_vpc.id]
+  }
+  tags = {
+    Tier = "Public"
+  }
+}

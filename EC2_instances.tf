@@ -7,7 +7,7 @@ resource "aws_instance" "multiTier_public_ec2_1" {
   key_name = "VPC"
   associate_public_ip_address = true
   subnet_id = aws_subnet.three-tier_public_subnet1.id
-  vpc_security_group_ids = [ aws_ ]
+  vpc_security_group_ids = [ aws_security_group.public_sg.id ]
   provisioner "file" {
     source = "../VPC.pem"
     destination = "/home/ubuntu/VPC.pem"
@@ -19,6 +19,9 @@ resource "aws_instance" "multiTier_public_ec2_1" {
       private_key = "${file("../VPC.pem")}"
     }
   }
+  depends_on = [
+    aws_security_group.public_sg
+  ]
 }
 
 resource "aws_instance" "multiTier_public_ec2_2" {
@@ -30,7 +33,7 @@ resource "aws_instance" "multiTier_public_ec2_2" {
   key_name = "VPC"
   associate_public_ip_address = true
   subnet_id = aws_subnet.three-tier_public_subnet2.id
-  vpc_security_group_ids = [ aws_ ]
+  vpc_security_group_ids = [ aws_security_group.public_sg.id ]
   provisioner "file" {
     source = "../VPC.pem"
     destination = "/home/ubuntu/VPC.pem"
@@ -42,6 +45,9 @@ resource "aws_instance" "multiTier_public_ec2_2" {
       private_key = "${file("../VPC.pem")}"
     }
   }
+  depends_on = [
+    aws_security_group.public_sg
+  ]
 }
 
 resource "aws_instance" "multiTier_private_ec2" {
@@ -52,4 +58,8 @@ resource "aws_instance" "multiTier_private_ec2" {
   }
   key_name = "VPC"
   subnet_id = aws_subnet.three-tier_private_subnet.id
+  vpc_security_group_ids = [ aws_security_group.private_sg.id ]
+  depends_on = [
+    aws_security_group.private_sg
+  ]
 }

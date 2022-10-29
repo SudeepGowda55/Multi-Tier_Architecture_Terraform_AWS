@@ -6,6 +6,9 @@ resource "aws_security_group" "public_sg" {
   tags = {
     Name = "public_instance_security_group"
   }
+  depends_on = [
+    aws_vpc.multi-tier_vpc
+  ]
 }
 
 resource "aws_security_group_rule" "public_sgr_for_http" {
@@ -52,6 +55,9 @@ resource "aws_security_group" "private_sg" {
   tags = {
     Name = "private_instance_security_group"
   }
+  depends_on = [
+    aws_vpc.multi-tier_vpc
+  ]
 }
 
 resource "aws_security_group_rule" "private_sgr_for_ssh" {

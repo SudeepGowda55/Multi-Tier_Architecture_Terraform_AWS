@@ -4,6 +4,9 @@ resource "aws_internet_gateway" "multiTier_IG" {
   tags = {
     Name = "three_tier_Internet_gateway"
   }
+  depends_on = [
+    aws_vpc.multi-tier_vpc
+  ]
 }
 
 # resource "aws_nat_gateway" "multiTier_nat_gateway" {

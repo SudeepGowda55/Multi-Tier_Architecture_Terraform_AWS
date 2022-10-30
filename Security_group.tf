@@ -62,7 +62,7 @@ resource "aws_security_group" "private_sg" {
 
 resource "aws_security_group_rule" "private_sgr_for_ssh" {
   type = "ingress"
-  protocol = "ssh"
+  protocol = "tcp"
   from_port = 22
   to_port = 22
   cidr_blocks = ["0.0.0.0/0"]

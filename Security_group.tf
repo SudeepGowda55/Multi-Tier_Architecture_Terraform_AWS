@@ -21,7 +21,7 @@ resource "aws_security_group_rule" "public_sgr_for_http" {
 }
 
 resource "aws_security_group_rule" "public_sgr_for_ssh" {
-  type = "ssh"
+  type = "ingress"
   protocol = "tcp"
   from_port = 22
   to_port = 22

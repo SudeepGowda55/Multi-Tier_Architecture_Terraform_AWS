@@ -9,7 +9,7 @@ resource "aws_internet_gateway" "multiTier_IG" {
   ]
 }
 
-resource "aws_eip" "name" {
+resource "aws_eip" "multi-tier_elastic_ip" {
   vpc = true
   depends_on = [
     aws_internet_gateway.multiTier_IG
@@ -21,7 +21,7 @@ resource "aws_nat_gateway" "multiTier_nat_gateway" {
     Name = "multiTier_nat_gateway"
   }
   subnet_id = aws_subnet.three-tier_public_subnet1.id
-  allocation_id = aws_eip.name.id
+  allocation_id = aws_eip.multi-tier_elastic_ip.id
   depends_on = [
     aws_internet_gateway.multiTier_IG
   ]
